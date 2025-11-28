@@ -1,0 +1,11 @@
+BuildingType
+PrimaryPropertyType
+NumberofBuildings
+NumberofFloors
+PropertyGFATotal
+PropertyGFABuilding(s)
+BuildingAge
+UsesSteam
+UsesNaturalGas
+HasParking
+NumPropertyUseTypes
