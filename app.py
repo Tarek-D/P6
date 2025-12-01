@@ -6,7 +6,7 @@ import os
 # ==========================================
 # 1. CONFIGURATION
 # ==========================================
-API_URL = "http://localhost:3000/predict"
+API_URL = os.getenv("API_URL", "http://localhost:3000/predict")
 st.set_page_config(page_title="Prédiction Énergie", page_icon="⚡")
 
 st.title("⚡ Prédiction de Consommation Énergétique")
