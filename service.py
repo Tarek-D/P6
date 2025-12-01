@@ -5,6 +5,8 @@ from enum import Enum
 from pydantic import BaseModel, Field
 from datetime import datetime
 
+API_URL = os.getenv("API_URL", "http://localhost:3000/predict")
+
 # Champs requis selon le notebook de modélisation :
 
 # Ne necissitent pas de transformation :
@@ -136,6 +138,10 @@ class EnergyPredictor:
         # --- A. Transformations Préliminaires ---
         
         # 1. Calcul de l'âge du bâtiment
+        # Gérer les erreurs potentielles (année future) ou incohérentes ou négatives ou textuelles ?
+        if input_.YearBuilt > REFERENCE_YEAR:
+            raise ValueError(f"YearBuilt ({input_.YearBuilt}) ne peut pas être dans le futur par rapport à {REFERENCE_YEAR}.")
+
         building_age = REFERENCE_YEAR - input_.YearBuilt
         
         # 2. Encodage des variables catégorielles (String -> Int)
