@@ -1,0 +1,11 @@
+service: "service.py:EnergyPredictor"
+include:
+  - "service.py"
+  - "BuildingType_label_encoding_mapping.json"  # Important pour embarquer les mappings
+  - "LargestPropertyUseType_label_encoding_mapping.json"  # Important pour embarquer les mappings
+  - "PrimaryPropertyType_label_encoding_mapping.json"
+python:
+  packages:
+    - scikit-learn
+    - pandas
+    - pydantic
