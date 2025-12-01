@@ -1,0 +1,20 @@
+# Image de base Python légère
+FROM python:3.10-slim
+
+# Dossier de travail dans le conteneur
+WORKDIR /app
+
+# Copie des fichiers nécessaires
+COPY app.py .
+COPY BuildingType_label_encoding_mapping.json .
+COPY LargestPropertyUseType_label_encoding_mapping.json .
+COPY PrimaryPropertyType_label_encoding_mapping.json .
+
+# Installation des dépendances
+RUN pip install streamlit requests
+
+# Port exposé par Streamlit (par défaut 8501)
+EXPOSE 8501
+
+# Commande de lancement
+CMD ["streamlit", "run", "app.py", "--server.address=0.0.0.0"]
