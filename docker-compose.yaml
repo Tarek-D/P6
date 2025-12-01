@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  # Service 1 : L'API (Backend)
+  api:
+    image: energy_prediction_service:euwlfngoy6tobasd  # L'image que vous venez de créer via bentoml containerize
+    ports:
+      - "3000:3000"  # On expose le port 3000 pour pouvoir tester l'API seule si besoin
+    networks:
+      - p6_reseau
+
+  # Service 2 : L'Interface (Frontend)
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.streamlit
+    ports:
+      - "8501:8501"  # On accèdera à Streamlit via localhost:8501
+    environment:
+      # ATTENTION : Dans Docker, "localhost" n'est pas votre machine.
+      # On utilise le nom du service "api" défini ci-dessus.
+      - API_URL=http://api:3000/predict 
+    depends_on:
+      - api  # Attend que l'API soit lancée
+    networks:
+      - p6_reseau
+
+networks:
+  p6_reseau:
