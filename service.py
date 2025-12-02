@@ -5,8 +5,6 @@ from enum import Enum
 from pydantic import BaseModel, Field
 from datetime import datetime
 
-API_URL = os.getenv("API_URL", "http://localhost:3000/predict")
-
 # Champs requis selon le notebook de modélisation :
 
 # Ne necissitent pas de transformation :
